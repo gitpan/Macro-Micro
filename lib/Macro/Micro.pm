@@ -11,13 +11,13 @@ Macro::Micro - really simple templating for really simple templates
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
- $Id: /my/icg/macexp/trunk/lib/Macro/Micro.pm 17140 2005-12-09T16:02:47.195978Z rjbs  $
+ $Id: /my/icg/macexp/trunk/lib/Macro/Micro.pm 17183 2005-12-10T00:39:55.084057Z rjbs  $
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -33,7 +33,7 @@ our $VERSION = '0.01';
     },
   );
 
-  $expander->expand_macros_in($character);
+  $expander->expand_macros_in($character, { race => $human_obj });
 
   # character is now a Lawful Good, 5' 6" human
 
@@ -56,7 +56,7 @@ There is only one valid argument:
 
 =cut
 
-my $DEFAULT_MACRO_FORMAT = qr/([\[<] (\w+) [>\]])/x;
+my $DEFAULT_MACRO_FORMAT = qr/(?<!\\)([\[<] (\w+) [>\]])/x;
 
 sub new {
   my ($class, %arg) = @_;
@@ -125,6 +125,8 @@ sub register_macros {
       Carp::croak "macro name '$name' must be a string or regexp reference";
     }
   }
+
+  return $self;
 }
 
 =head2 C<get_macro>
@@ -222,8 +224,8 @@ sub fast_expander {
   my $applicator = sub {
     my ($object) = @_;
 
-    Carp::croak "object of expansion must be a defined, non-reference scalar"
-      if not(defined $object) or ref $object;
+    return unless defined $object;
+    Carp::croak "object of expansion must not be a reference" if ref $object;
 
     my $expander = sub {
       my $macro = $self->get_macro($_[1]);
