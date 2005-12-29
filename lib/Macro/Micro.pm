@@ -11,13 +11,13 @@ Macro::Micro - really simple templating for really simple templates
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
- $Id: /my/icg/macexp/trunk/lib/Macro/Micro.pm 17191 2005-12-11T03:30:15.035881Z rjbs  $
+ $Id: /icg/macexp/trunk/lib/Macro/Micro.pm 34167 2005-12-23T00:18:33.684408Z rjbs  $
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
@@ -232,8 +232,8 @@ sub fast_expander {
 
   my $expander = sub {
     my $macro = $self->get_macro($_[1]);
-    return $_[0] unless $macro;
-    return ref $macro ? $macro->($_[1], $_[2], $stash) : $macro;
+    return $_[0] unless defined $macro;
+    return ref $macro ? $macro->($_[1], $_[2], $stash)||'' : $macro;
   };
 
   my $applicator = sub {
