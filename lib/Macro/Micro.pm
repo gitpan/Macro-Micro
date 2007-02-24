@@ -11,13 +11,13 @@ Macro::Micro - really simple templating for really simple templates
 
 =head1 VERSION
 
-version 0.05
+version 0.051
 
- $Id: /icg/macexp/trunk/lib/Macro/Micro.pm 26944 2006-10-15T01:09:59.741609Z rjbs  $
+ $Id: Micro.pm 28159 2007-02-24 15:20:40Z rjbs $
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.051';
 
 =head1 SYNOPSIS
 
@@ -221,6 +221,8 @@ sub _expand_template {
     return $_[0] unless defined $macro;
     return ref $macro ? $macro->($_[1], $_[2], $stash)||'' : $macro;
   };
+
+  return ${ $object->_text } unless $object->_parts;
 
   return join '', map { ref $_ ? $expander->(@$_[0, 1], $object->_text) : $_ }
                   $object->_parts;
