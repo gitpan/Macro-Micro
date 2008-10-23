@@ -1,15 +1,21 @@
 --- #YAML:1.0
-name:                Macro-Micro
-version:             0.051
-abstract:            really simple templating for really simple templates
-license:             perl
-generated_by:        ExtUtils::MakeMaker version 6.31
-distribution_type:   module
-requires:     
-    Carp:                          0
-    Test::More:                    0
-meta-spec:
-    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
-    version: 1.2
+name:               Macro-Micro
+version:            0.052
+abstract:           really simple templating for really simple templates
 author:
     - Ricardo Signes <rjbs@cpan.org>
+license:            perl
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    Carp:        0
+    Test::More:  0
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.46
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
