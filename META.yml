@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Macro-Micro
-version:            0.052
+version:            0.053
 abstract:           really simple templating for really simple templates
 author:
     - Ricardo Signes <rjbs@cpan.org>
@@ -11,11 +11,13 @@ configure_requires:
 requires:
     Carp:        0
     Test::More:  0
+resources:
+    repository:  http://github.com/rjbs/email-mime
 no_index:
     directory:
         - t
         - inc
-generated_by:       ExtUtils::MakeMaker version 6.46
+generated_by:       ExtUtils::MakeMaker version 6.48
 meta-spec:
     url:      http://module-build.sourceforge.net/META-spec-v1.4.html
     version:  1.4
